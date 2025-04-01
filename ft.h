@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 01:16:34 by ypellegr          #+#    #+#             */
-/*   Updated: 2025/03/31 13:57:39 by ypellegr         ###   ########.fr       */
+/*   Created: 2025/02/17 11:20:53 by elandi            #+#    #+#             */
+/*   Updated: 2025/04/01 08:46:54 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_tolower(char *str)
-{
-	int	i;
+#ifndef FT_H
+# define FT_H
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] += 32;
-		i += 1;
-	}
-	return (str);
-}
+# include <stddef.h>
 
-/*int	main(void)
-{
-	char	str[] = "Hello";
-	printf("%s", ft_strlowcase(str));
-	return (0);
-}*/
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+
+#endif

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strupcase.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 01:14:29 by ypellegr          #+#    #+#             */
-/*   Updated: 2025/03/31 14:21:03 by ypellegr         ###   ########.fr       */
+/*   Created: 2025/04/01 12:06:59 by ypellegr          #+#    #+#             */
+/*   Updated: 2025/04/01 16:19:19 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_toupper(char *str)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	while (str[i])
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
 	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i] -= 32;
-		i += 1;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	return (str);
+	if (c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
-
-/*int	main(void)
-{
-	char	str[] = "Hello";
-	printf("%s", ft_strupcase(str));
-	return (0);
-}*/

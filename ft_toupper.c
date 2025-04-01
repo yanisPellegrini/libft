@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 00:55:25 by ypellegr          #+#    #+#             */
-/*   Updated: 2025/02/04 02:31:04 by ypellegr         ###   ########.fr       */
+/*   Created: 2025/02/04 01:15:00 by ypellegr          #+#    #+#             */
+/*   Updated: 2025/04/01 15:41:45 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_alpha(char *str)
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	if (!str)
-		return (1);
-	while (str[i])
-	{
-		if (str[i] == '\0')
-			return (1);
-		if (!((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a'
-					&& str[i] <= 'z')))
-			return (0);
-		i += 1;
-	}
-	return (1);
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }
 
 /*int main()
 {
-	char str[] = "123";
-	printf("%d", ft_str_is_alpha(str));
+	printf("%c", ft_toupper('a')); // Example usage
 	return (0);
 }*/

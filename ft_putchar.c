@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elandi <elandi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:28:31 by elandi            #+#    #+#             */
-/*   Updated: 2025/02/17 11:48:39 by elandi           ###   ########.fr       */
+/*   Updated: 2025/04/01 10:09:10 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "libft.h"
 
 void	ft_putchar(char c)
 {

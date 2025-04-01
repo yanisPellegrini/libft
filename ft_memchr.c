@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_num.c                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 00:59:53 by ypellegr          #+#    #+#             */
-/*   Updated: 2025/02/04 02:30:45 by ypellegr         ###   ########.fr       */
+/*   Created: 2025/04/01 12:47:27 by ypellegr          #+#    #+#             */
+/*   Updated: 2025/04/01 16:22:03 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_str_is_numeric(char *str)
+#include "libft.h"
+
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i;
+	const unsigned char	*ptr = (const unsigned char *)s;
+	size_t				i;
 
 	i = 0;
-	if (!str)
-		return (1);
-	while (str[i])
+	while (i < n)
 	{
-		if (str[i] == '\0')
-			return (1);
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (0);
-		i += 1;
+		if (ptr[i] == (unsigned char)c)
+			return ((void *)&ptr[i]);
+		i++;
 	}
-	return (1);
+	return (NULL);
 }
-
-/*int main()
-{
-	char str[] = "123";
-	printf("%d", ft_str_is_numeric(str));
-	return (0);
-}*/

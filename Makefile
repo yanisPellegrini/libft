@@ -1,45 +1,31 @@
-NAME           	= bsq
+SRCS    = ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_isalpha.c \
+    ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c \
+    ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
+    ft_calloc.c ft_strdup.c 
 
-SRCS            = main.c	\
-				error_gest.c	\
-				utils/ft_atoi.c	\
-				dimensions.c	\
-				utils/ft_strncpy.c		\
-				utils/ft_strlen.c	\
-				utils/ft_putchar.c	\
-				utils/min.c		\
-				utils/ft_strdup.c \
-				link_list.c	\
-				manage_map.c	\
-				manage_matrix.c	\
+OBJS    = ${SRCS:.c=.o}
 
-OBJ            = $(SRCS:.c=.o)
+NAME    = libft.a
 
-CFLAGS         = -Wall -Wextra -Werror -I .
+CC        = cc
+RM        = rm -f
 
-PASTEL_PINK = \033[1;38;5;218m
-RED = \033[1;31m
-WHITE = \033[0m
-LIGHT_ORANGE = \033[1;38;5;217m
+CFLAGS     = -Wall -Wextra -Werror
 
-all:            $(NAME) done
+all:        ${NAME}
 
-$(NAME)		:	$(OBJ)
-		@echo "$(PASTEL_PINK)Building executable...$(WHITE)"
-		@cc -o $(NAME) $(OBJ)
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-%.o: %.c
-		@cc $(CFLAGS) -c $< -o $@
+${NAME}:    ${OBJS}
+	ar rcs ${NAME} ${OBJS}
 
 clean:
-		@echo "$(LIGHT_ORANGE)Cleaning object files$(WHITE)"
-		@rm -f $(OBJ)
+	${RM} ${OBJS}
 
-fclean:         clean
-		@echo "$(RED)Removing executable$(WHITE)"
-		@rm -f $(NAME)
+fclean:        clean
+	${RM} ${NAME}
 
-re:             fclean all
+bonus: all
 
-done:
-		@echo "$(PASTEL_PINK)Done!$(WHITE)"
+re:            fclean all

@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 04:15:40 by ypellegr          #+#    #+#             */
-/*   Updated: 2025/04/01 16:18:52 by ypellegr         ###   ########.fr       */
+/*   Created: 2025/04/01 13:32:51 by ypellegr          #+#    #+#             */
+/*   Updated: 2025/04/01 16:22:01 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t nb)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
-	size_t	j;
-	size_t	dest_len;
-	size_t	src_len;
+	const unsigned char	*ptr1 = (const unsigned char *)s1;
+	const unsigned char	*ptr2 = (const unsigned char *)s2;
+	size_t				i;
 
-	dest_len = 0;
-	while (dest[dest_len] && dest_len < nb)
-		dest_len++;
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	if (dest_len == nb)
-		return (nb + src_len);
-	i = dest_len;
-	j = 0;
-	while (src[j] && i + 1 < nb)
-		dest[i++] = src[j++];
-	if (i < nb)
-		dest[i] = '\0';
-	return (dest_len + src_len);
+	i = 0;
+	while (i < n)
+	{
+		if (ptr1[i] != ptr2[i])
+			return (ptr1[i] - ptr2[i]);
+		i++;
+	}
+	return (0);
 }
