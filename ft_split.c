@@ -3,63 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanispellegrini <yanispellegrini@studen    +#+  +:+       +#+        */
+/*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:15:17 by ypellegr          #+#    #+#             */
-/*   Updated: 2025/04/03 10:54:03 by yanispelleg      ###   ########.fr       */
+/*   Updated: 2025/04/04 12:18:28 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-int count_words(char *str, char c)
+static int	count_words(char const *s, char c)
 {
-    int count = 0;
-    int in_word = 0;
+	int	count;
+	int	in_word;
 
-    if (str == NULL)
-        return 0;
-    while (*str) {
-        if (*str == c) {
-            in_word = 0;
-        }
-        if (!in_word) {
-            in_word = 1;
-            count++;
-        }
-        str++;
-    }
-    return count;
+	count = 0;
+	in_word = 0;
+	while (*s)
+	{
+		if (*s != c && in_word == 0)
+		{
+			in_word = 1;
+			count++;
+		}
+		else if (*s == c)
+			in_word = 0;
+		s++;
+	}
+	return (count);
 }
 
-int length(char c, int i, char *str)
+static char	*word_dup(const char *s, int start, int end)
 {
-    int temp = i;
+	char	*word;
+	int		i;
 
-    while (str[i] != c && str[i] != '\0') {
-        i++;
-    }
-    i -= temp;
-    return (i + 1);
+	word = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (start < end)
+		word[i++] = s[start++];
+	word[i] = '\0';
+	return (word);
 }
 
-char **my_str_to_word_array(char *str, char c)
+static void	free_all(char **result, int j)
 {
-    int count = count_words(str, c);
-    char **tab = malloc(sizeof(char *) * (count + 1));
-    int i = 0;
-    int index = 0;
-    int j = 0;
+	while (j >= 0)
+		free(result[j--]);
+	free(result);
+}
 
-    for (j; j < count; j++) {
-        tab[j] = malloc(sizeof(char) * length(c, i, str));
-        for (index = 0; str[i] != c && str[i] != '\0'; index ++) {
-            tab[j][index] = str[i];
-            i++;
-        }
-        i++;
-        tab[j][index] = '\0';
-    }
-    tab[count] = NULL;
-    return tab;
+char	**ft_split(char const *s, char c)
+{
+	char	**result;
+	int		i;
+	int		j;
+	int		start;
+
+	if (!s)
+		return (NULL);
+	result = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i])
+		{
+			start = i;
+			while (s[i] && s[i] != c)
+				i++;
+			result[j] = word_dup(s, start, i);
+			if (!result[j])
+			{
+				free_all(result, j - 1);
+				return (NULL);
+			}
+			j++;
+		}
+	}
+	result[j] = NULL;
+	return (result);
 }

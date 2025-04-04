@@ -6,39 +6,58 @@
 /*   By: ypellegr <ypellegr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:25:03 by ypellegr          #+#    #+#             */
-/*   Updated: 2025/04/02 12:28:28 by ypellegr         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:21:39 by ypellegr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
-char *ft_itoa(int n)
+static int	get_num_length(int n)
 {
-	char	*str;
-	int		len;
-	int		sign;
-	int		i;
+	int	len;
 
-	sign = (n < 0) ? -1 : 1;
-	len = (n <= 0) ? 1 : 0;
+	len = 0;
+	if (n <= 0)
+		len = 1;
 	while (n)
 	{
 		n /= 10;
 		len++;
 	}
+	return (len);
+}
+
+static void	fill_str(char *str, int n, int len)
+{
+	int	sign;
+
+	sign = 1;
+	if (n < 0)
+	{
+		sign = -1;
+		str[0] = '-';
+	}
+	str[len] = '\0';
+	while (--len >= 0 && str[len] != '-')
+	{
+		str[len] = (n % 10) * sign + '0';
+		n /= 10;
+	}
+}
+
+char	*ft_itoa(int n)
+{
+	char	*str;
+	int		len;
+
+	if (n == INT_MIN)
+		return (ft_strdup("-2147483648"));
+	len = get_num_length(n);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	str[len] = '\0';
-	i = len - 1;
-	n *= sign;
-	while (i >= 0)
-	{
-		str[i--] = (n % 10) + '0';
-		n /= 10;
-	}
-	if (sign == -1)
-		str[0] = '-';
+	ft_bzero(str, len + 1);
+	fill_str(str, n, len);
 	return (str);
 }
-
